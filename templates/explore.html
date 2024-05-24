@@ -1,0 +1,607 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+    <body>
+        
+        <!-- <link rel="stylesheet" href="{% static '/css/style2.css' %}"> -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+    .sidebar-range {
+    min-height: 100px; /* Adjust as needed */
+    padding: 10px; /* Adjust as needed */
+}
+    .range {
+        min-height: 100px; /* Adjust as needed */
+
+    }
+
+</style>
+    <!--------------- header-section --------------->
+    {% include 'header.html' %}
+    <!--------------- header-section-end --------------->
+ 
+    <!--------------- products-sidebar-section--------------->
+    <section class="product product-sidebar footer-padding " >
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3  d-none d-lg-block ">
+                    <div class="sidebar" data-aos="fade-right">
+                        <div class="sidebar-section">
+                            <div class="sidebar-wrapper sidebar-range">
+                                <div class="sidebar-wrapper sidebar-range">
+                                    <h5 class="wrapper-heading">Price Range</h5>
+                                    <div class="price-field range-slider">
+                                        <input type="range" min="0" value="20" id="minPrice" class="slider">
+                                        <input type="range" max="2000" value="400" id="maxPrice" class="slider">
+                                    </div>
+                                    <div class="price-wrap">
+                                        <div class="price-wrap-1">
+                                            <label for="one">PKR</label>
+                                            <input id="one" readonly>
+                                        </div>
+                                        <div class="price-wrap_line">-</div>
+                                        <div class="price-wrap-2">
+                                            <label for="two">PKR </label>
+                                            <input id="two" readonly>
+                                        </div>
+                                    </div>
+                                    <button id="priceFilter" class="shop-btn">Filter</button>
+                                </div>
+                        
+                            </div>
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Product Categories</h5>
+                                <div class="sidebar-item">
+                                    <ul class="sidebar-list">
+
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getMobilePhones' 1 %}">
+                                                <label for="mobile">Mobiles</label>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getLaptops' 1 %}">
+                                                <label for="Laptop">Laptops</label>
+                                            
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getSmartWatches' 1 %}">
+                                                <label for="SmartWatches">Smart Watches</label>
+                                            
+                                            </a>
+                                        </li>
+                               
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getSpeakers' 1 %}">
+                                                <label for="BTspeakers">Speakers</label>
+                                            
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getEarbuds' 1 %}">
+                                                <label for="earbuds">Earbuds</label>
+                                            
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getTVs' 1 %}">
+                                                <label for="TVs">TVs</label>
+                                            
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getPowerBanks' 1 %}">
+                                                <label for="TVs">Power Banks</label>
+                                            
+                                            </a>
+                                        </li>
+                               
+                          
+                                        <li>
+                                            <a class="categoryLink" href="{% url 'getTablets' 1 %}">
+                                                <label for="Tablets">Tablets</label>
+                                            
+                                            </a>
+                                        </li>
+                                      
+                                        
+                                    </ul>
+                                  
+                                </div>
+                            </div>
+                            <hr>
+
+                            <hr>
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Brands</h5>
+                                <div class="sidebar-item">
+                                    <ul class="sidebar-list">
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="samsung" name="samsung">
+                                            <label for="thread">Samsung 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            
+                                            <input type="checkbox" class="exploreBrands" id="realme" name="realme">
+                                            <label for="thread">Real me 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="huawei" name="huawei">
+                                            <label for="thread">Huawei 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="tecno" name="tecno">
+                                            <label for="thread">Tecno
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="oppo" name="oppo">
+                                            <label for="thread">Oppo
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="nokia" name="nokia">
+                                            <label for="thread">Nokia
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="infinix" name="infinix">
+                                            <label for="thread">Infinix
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="apple" name="apple">
+                                            <label for="thread">Apple 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="dell" name="dell">
+                                            <label for="thread">Dell 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="hp" name="hp">
+                                            <label for="thread">HP
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="lenovo" name="lenovo">
+                                            <label for="thread">Lenovo
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="asus" name="asus">
+                                            <label for="thread">Asus
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="ronin" name="ronin">
+                                            <label for="thread">Ronin
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="audionic" name="audionic">
+                                            <label for="thread">Audionic
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="mi_realme_xiaomi" name="mi_realme_xiaomi">
+                                            <label for="thread">MI
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="dany" name="dany">
+                                            <label for="thread">Dany
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="itel" name="itel">
+                                            <label for="thread">Itel
+                                            </label>
+                                        </li>
+                                        
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="vivo" name="vivo">
+                                            <label for="thread">Vivo
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="zero" name="zero">
+                                            <label for="thread">Zero
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="airox" name="airox">
+                                            <label for="thread">Airox
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="soundpeats" name="soundpeats">
+                                            <label for="thread">Soundpeats
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="exploreBrands" id="gfive" name="gfive">
+                                            <label for="thread">Gfive
+                                            </label>
+                                        </li>
+ 
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="product-sidebar-section" data-aos="fade-up">
+                        <div class="row g-5">
+                            <div class="col-lg-12">
+                                <div class="product-sorting-section">
+                                    <div class="result">
+                                        <p>Showing <span>{{range}} results</span></p>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            {% for product in products  %}
+                            <div class="col-6 col-lg-4 ">
+                                <div class="product-wrapper" data-aos="fade-up">
+                                    <div class="product-img">
+                                        <img src="{{product.image_url}}"
+                                            alt="product-img">
+                                        <div class="product-cart-items">
+                                  
+                                    {% if product.wishlisted %}
+                                    <button data-id = "{{product.id}}" class="wishlisted cart-item">
+                                        <span>
+                                            
+                                            <svg width="40" height="40" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 107.21"><title>remove-from-wishlist</title><path d="M73.13,93.77,59.58,107.21,44,92.19c-2.43-2.35-5.25-4.92-8.18-7.59C19.93,70.14.79,52.69,0,31.09l0-1.65A28.51,28.51,0,0,1,9,8.54,31.68,31.68,0,0,1,29.57.31l1.71,0c13.72.18,20,6.2,28.18,14.24C66.21,7.38,71.81,1.52,83.21.21a33.07,33.07,0,0,1,18.62,3.37,34.41,34.41,0,0,1,12.24,10.25,31,31,0,0,1,6,14.86A30.55,30.55,0,0,1,116.82,46c-.41.8-.88,1.65-1.39,2.52l-.45.74A30.65,30.65,0,0,1,73.13,93.77Zm30.73-27.85a3.87,3.87,0,0,1,1.48.29,3.92,3.92,0,0,1,1.26.84,4,4,0,0,1,.84,1.25l0,.07a3.78,3.78,0,0,1,.28,1.35v.15a3.86,3.86,0,0,1-.29,1.41,4.15,4.15,0,0,1-.84,1.26,3.7,3.7,0,0,1-1.25.83l-.07,0a4,4,0,0,1-1.39.28H80.6a3.87,3.87,0,0,1-1.48-.3l-.06,0a3.58,3.58,0,0,1-1.2-.81A3.87,3.87,0,0,1,77,71.3l0-.07a4,4,0,0,1-.28-1.4v0A4,4,0,0,1,77,68.33a3.86,3.86,0,0,1,.84-1.27,4,4,0,0,1,1.25-.83,3.71,3.71,0,0,1,1.47-.3Zm6.19-21.06c.34-.58.67-1.17,1-1.76a24.13,24.13,0,0,0,2.56-13.67,24.39,24.39,0,0,0-4.72-11.73,27.78,27.78,0,0,0-9.92-8.31A26.62,26.62,0,0,0,84,6.68c-9.13,1-14,6.2-19.9,12.47l-4.43,4.64L55.2,19.45c-7.27-7.14-12.74-12.52-24-12.67l-1.4,0a25.21,25.21,0,0,0-16.36,6.5A22.12,22.12,0,0,0,6.49,29.52l0,1.34c.67,18.85,18.72,35.3,33.67,48.93,2.89,2.63,5.67,5.16,8.32,7.72l11,10.61,9-8.91a30.66,30.66,0,0,1,41.55-44.35Zm-.76,7.87a24.14,24.14,0,1,0,7.07,17.07,24.06,24.06,0,0,0-7.07-17.07Z"/></svg>
+
+                                        </span>
+                                    </button>
+                                        
+                                    {% else %}
+                                        
+                                    <button data-id = "{{product.id}}" class="favourite cart-item">
+                                        <span>
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="#AE1C9A" />
+                                                <path
+                                                    d="M14.6928 12.3935C13.5057 12.54 12.512 13.0197 11.671 13.8546C10.9155 14.6016 10.4615 15.3926 10.201 16.4216C9.73957 18.2049 10.0745 19.9626 11.1835 21.6141C11.8943 22.6723 12.8135 23.6427 14.4993 25.1221C15.571 26.0632 18.8422 28.8096 19.0022 28.9011C19.1511 28.989 19.2069 29 19.5232 29C19.8395 29 19.8953 28.989 20.0442 28.9011C20.2042 28.8096 23.4828 26.0595 24.5471 25.1221C26.2404 23.6354 27.1521 22.6687 27.8629 21.6141C28.9719 19.9626 29.3068 18.2049 28.8454 16.4216C28.5849 15.3926 28.1309 14.6016 27.3754 13.8546C26.6237 13.1113 25.8199 12.6828 24.7667 12.4631C24.2383 12.3533 23.2632 12.3423 22.8018 12.4448C21.5142 12.7194 20.528 13.3529 19.6274 14.4808L19.5232 14.609L19.4227 14.4808C18.5333 13.3749 17.562 12.7414 16.3228 12.4631C15.9544 12.3789 15.1059 12.3423 14.6928 12.3935ZM15.9357 13.5104C16.9926 13.6935 17.9044 14.294 18.6263 15.2864C18.7491 15.4585 18.9017 15.6636 18.9613 15.7478C19.2367 16.1286 19.8098 16.1286 20.0851 15.7478C20.1447 15.6636 20.2973 15.4585 20.4201 15.2864C21.4062 13.9315 22.7795 13.2944 24.2755 13.4958C25.9352 13.7191 27.2303 14.8616 27.7252 16.5424C28.116 17.8717 27.9448 19.2668 27.234 20.5228C26.6386 21.5738 25.645 22.676 23.9145 24.203C23.0772 24.939 19.5567 27.9198 19.5232 27.9198C19.486 27.9198 15.9804 24.95 15.1319 24.203C12.4711 21.8557 11.4217 20.391 11.1686 18.6736C11.0049 17.5641 11.2393 16.3703 11.8087 15.4292C12.6646 14.0121 14.3318 13.2358 15.9357 13.5104Z"
+                                                    fill="#000" />
+                                            </svg>
+
+                                        </span>
+                                    </button>
+                                    {% endif %}
+                                  
+                                </div>
+                                    </div>
+                                    <div class="product-info">
+                                        
+                                        <div class="product-description">
+                                            <a href="{% url 'product' product.id %}" class=" product-details ">{{product.name | title}}
+                                            </a>
+                                            <div class="price">
+                                               
+                                                <span class="new-price">Rs. {{product.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-cart-btn">
+                                        <a href="{% url 'product' product.id %}" class="product-btn">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+                <div class="col-lg-9  ">
+                        <div class="d-flex  justify-content-center" id="pagination">
+                           
+
+                            <!-- <button class="shop-btn mx-2" id ="previousPage">
+                                <
+                            </button>
+                           <button class="shop-btn mx-2">
+
+                                {{pageNumber}}
+                            </button>
+                            
+
+                                <button class="shop-btn mx-2 " id ="nextPage">
+                                    >
+                                </button> -->
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        $(document).ready(function() {
+            let mobileMenu = document.getElementById('mobileBrands');
+            let priceFilterMobile = document.getElementById('priceFilterMobile');
+            priceFilterMobile.classList.remove('d-none');
+            priceFilterMobile.classList.add('d-block');
+            console.log(mobileMenu)
+            mobileMenu.classList.remove('d-none');
+            mobileMenu.classList.add('d-block');
+            let lowerSlider = document.getElementById('minPrice'),
+                upperSlider = document.getElementById('maxPrice'),
+                lowerInput = document.getElementById('one'),
+                upperInput = document.getElementById('two');
+        
+            // Ensure that we properly set slider values from URL parameters
+            const setSlidersFromURL = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                let minPrice = urlParams.get('minPrice') ? parseInt(urlParams.get('minPrice').replace('K', ''), 10) : parseInt(lowerSlider.min);
+                let maxPrice = urlParams.get('maxPrice') ? parseInt(urlParams.get('maxPrice').replace('K', ''), 10) : parseInt(upperSlider.max);
+        
+                lowerSlider.value = minPrice;
+                upperSlider.value = maxPrice;
+        
+                // Update the input fields to reflect the slider values
+                lowerInput.value = `${minPrice}K`;
+                upperInput.value = `${maxPrice}K`;
+            };
+        
+            // Call this function as soon as the page loads to set initial slider positions
+            setSlidersFromURL();
+        
+            // Function to update URL and refresh the page based on current slider values
+            const updatePageURL = () => {
+            const brandsParam = urlParams.get('brands');
+            const searchParams = urlParams.get('q');
+            let minPrice =  document.getElementById('minPrice').value + 'K'
+            let maxPrice =  document.getElementById('maxPrice').value + 'K'
+            let queryString = 'minPrice=' + minPrice + '&maxPrice=' + maxPrice;
+                if (brandsParam !== null) {
+                queryString += '&brands=' + brandsParam;
+            }
+            if (searchParams !== null) {
+                queryString += '&q=' + searchParams;
+            }
+                let newURL = `http://127.0.0.1:8000/products/{{currentUrl}}/1?${queryString}`;
+                window.location.href = newURL;
+            };
+        
+            // Event listeners for when the slider values change
+            lowerSlider.oninput = () => {
+                if (parseInt(lowerSlider.value) > parseInt(upperSlider.value)) {
+                    lowerSlider.value = parseInt(upperSlider.value);
+                }
+                lowerInput.value = lowerSlider.value + 'K';
+            };
+        
+            upperSlider.oninput = () => {
+                if (parseInt(upperSlider.value) < parseInt(lowerSlider.value)) {
+                    upperSlider.value = parseInt(lowerSlider.value);
+                }
+                upperInput.value = upperSlider.value + 'K';
+            };
+        
+            // When the filter button is clicked, update the URL and refresh the page
+            $("#priceFilter").click(updatePageURL);
+        });
+        </script>
+        
+        
+    <script>
+
+        const brands = document.getElementsByClassName('exploreBrands');
+        const selectedBrands = [];
+        const categoryLinks = document.getElementsByClassName('categoryLink');
+        function updateCategoryLinks(minPrice,maxPrice){
+            console.log("IN UPDATE CATEGORY LINKS")
+            console.log(minPrice,maxPrice)
+            console.log(selectedBrands)
+            for (let i = 0; i < categoryLinks.length; i++) {
+                const element = categoryLinks[i] ;
+                let href = element.href + '?' ;
+                console.log(href)
+                if (selectedBrands.length > 0) {
+                    href += 'brands=' + selectedBrands.join('_');
+                }
+                if (minPrice !== null) {
+                    href += '&minPrice=' + minPrice;
+                }
+                if (maxPrice !== null) {
+                    href += '&maxPrice=' + maxPrice;
+                }
+                element.href = href;
+        }
+    }
+        const currentUrl = window.location.origin + window.location.pathname;  
+        document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let minPrice = urlParams.get('minPrice') ? parseInt(urlParams.get('minPrice').replace('K', ''), 10) * 1000 : 0;
+    let maxPrice = urlParams.get('maxPrice') ? parseInt(urlParams.get('maxPrice').replace('K', ''), 10) * 1000 : 50000;
+
+    
+});
+
+        const priceFilter = document.getElementById('priceFilter');
+        priceFilter.addEventListener('click', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandsParam = urlParams.get('brands');
+            const searchParams = urlParams.get('q');
+            let minPrice =  document.getElementById('minPrice').value + 'K'
+            let maxPrice =  document.getElementById('maxPrice').value + 'K'
+            let queryString = 'minPrice=' + minPrice + '&maxPrice=' + maxPrice;
+            if (brandsParam !== null) {
+                queryString += '&brands=' + brandsParam;
+            }
+            if (searchParams !== null) {
+                queryString += '&q=' + searchParams;
+            }
+            const exploreUrl = 'http://127.0.0.1:8000/products/'+'{{currentUrl}}/1' + '?' + queryString;
+            window.location.href = exploreUrl;
+        });
+    
+    function updateStateFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const minPrice = urlParams.get('minPrice');
+        const maxPrice = urlParams.get('maxPrice');
+        if (minPrice !== null && maxPrice !== null) {
+            document.getElementById('minPrice').value = minPrice.replace('K', '');
+            document.getElementById('maxPrice').value = maxPrice.replace('K', '');
+        }
+        const brandsParam = urlParams.get('brands');
+
+        if (brandsParam != 'null' && brandsParam !== null) {
+            const brandsArray = brandsParam.split('_');
+            selectedBrands.push(...brandsArray);
+
+
+            for (let i = 0; i < brands.length; i++) {
+                const element = brands[i];
+                const brandName = element.id;
+
+                if (brandsArray.includes(brandName)) {
+                    element.checked = true;
+                }
+            }
+ 
+        }
+        updateCategoryLinks(minPrice,maxPrice)
+
+    }
+    updateStateFromUrl()
+
+    for (let index = 0; index < brands.length; index++) {
+        const element = brands[index];
+
+        element.addEventListener('change', (event) => {
+            const brandName = event.currentTarget.id;
+
+            if (event.currentTarget.checked) {
+                selectedBrands.push(brandName);
+            } else {
+                const indexToRemove = selectedBrands.indexOf(brandName);
+                if (indexToRemove !== -1) {
+                    selectedBrands.splice(indexToRemove, 1);
+                }
+            }
+
+            let queryString = 'brands=' + selectedBrands.join('_');
+            if (minPrice !== null) {
+                queryString += '&minPrice=' + minPrice;
+            }
+            if (maxPrice !== null) {
+                queryString += '&maxPrice=' + maxPrice;
+            }
+            // queryString += '&minPrice=' + minPrice + '&maxPrice=' + maxPrice;
+
+            const exploreUrl = currentUrl + '?' + queryString;
+            
+            window.location.href = exploreUrl;
+        });
+    }
+
+            const pagination = document.getElementById("pagination")
+            const totalPages = Number("{{totalPages}}")
+            const currentPage = Number("{{pageNumber}}")
+            const nextpages = totalPages - currentPage
+            const previousPages = currentPage - 1 
+            const lastPage = totalPages
+            const urlParams = new URLSearchParams(window.location.search);
+            const brandsParam = urlParams.get('brands');
+            const searchParams = urlParams.get('q');
+            const minPrice = urlParams.get('minPrice');
+            const maxPrice = urlParams.get('maxPrice');
+            let j =0
+            let queryString = ''
+            if (brandsParam !== null) {
+                queryString += 'brands=' + brandsParam;
+            }
+            if (searchParams !== null) {
+                queryString += '&q=' + searchParams;
+            }
+            if (minPrice !== null) {
+                queryString += '&minPrice=' + minPrice;
+            }
+            if (maxPrice !== null) {
+                queryString += '&maxPrice=' + maxPrice;
+            } 
+
+            for(let i=currentPage-2 ;i<currentPage;i++){
+            
+                    const button= document.createElement('button')
+                    const a = document.createElement('a')
+                    const p = i
+                    
+                    if (p<=0)
+                    {
+                        continue
+                    }
+                    a.href = 'http://127.0.0.1:8000/products/'+'{{currentUrl}}/'+p + '?' + queryString 
+                    button.classList.add('shop-btn')
+                    button.classList.add('mx-2')
+                    button.innerText = i
+                    a.appendChild(button)
+                    pagination.appendChild(a)
+                    j++
+                }
+          
+                const button= document.createElement('button')
+                const a = document.createElement('a')
+                const p = currentPage
+                
+                a.href = 'http://127.0.0.1:8000/products/'+'{{currentUrl}}/'+p + '?' + queryString 
+
+                button.classList.add('shop-btn')
+                button.classList.add('mx-2')
+                button.id = 'activeShopBtn'
+                button.style.background = "#232532";
+                button.innerText = currentPage
+                a.appendChild(button)
+                pagination.appendChild(a)
+
+
+            for(let i=1 ;i<3;i++){
+
+
+                const button= document.createElement('button')
+                const a = document.createElement('a')
+                const p = currentPage+i
+                if (p>lastPage)
+                {
+                    continue
+                }
+                    a.href = 'http://127.0.0.1:8000/products/'+'{{currentUrl}}/'+p + '?' + queryString 
+
+                button.classList.add('shop-btn')
+                button.classList.add('mx-2')
+                button.innerText = currentPage+i
+                a.appendChild(button)
+                pagination.appendChild(a)
+            }
+        
+    </script>
+    <!--------------- products-sidebar-section-end--------------->
+    
+    <!--------------- footer-section--------------->
+    {% include 'footer.html' %}
+    <!--------------- footer-section-end--------------->
+    
+</body>
+{% endblock body %}
+
+  

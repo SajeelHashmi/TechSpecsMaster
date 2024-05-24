@@ -1,0 +1,471 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<style>
+    
+.rating {
+  margin-top: 40px;
+  border: none;
+}
+
+.rating > label {
+  color: #90A0A3;
+  float: right;
+}
+
+.rating > label:before {
+  margin: 5px;
+  font-size: 2em;
+  font-family: FontAwesome;
+  content: "\f005";
+  display: inline-block;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #F79426;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+  color: #FECE31;
+}
+</style>
+    
+<body>
+
+
+    <!--------------- header-section --------------->
+    {% include 'header.html' %}
+    <!--------------- header-section-end --------------->
+
+    <!--------------- products-info-section--------------->
+    <section class="product product-info">
+        <div class="container">
+       
+            <div class="product-info-section">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="product-info-img" data-aos="fade-right">
+                            <div class="swiper product-top">
+                                
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide slider-top-img">
+                                        <img src="{{product.image_url}}" alt="img">
+                                    </div>
+                        
+                                   
+                                </div>
+                                
+                            </div>
+  
+                            <div class="swiper product-bottom">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide slider-bottom-img">
+                                        <img src="{{product.image_url}}"
+                                            alt="img">
+                                    </div>
+  
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product-info-content" data-aos="fade-left">
+                            
+                            <a target="_blank" href="{{product.link}}">
+                            <h5>
+
+                                    {{product.name|title }}
+                                </h5>
+                            </a>
+                            
+                            <div class="price">
+                                
+                                <span class="new-price">Rs {{product.price}}</span>
+                            </div>
+                           
+      
+                           
+                            <hr>
+                            <div class="product-details">
+                                <p class="category">Category : <span class="inner-text">{{product.category}}</span></p>
+                                <p class="sku">Brand : <span class="inner-text">{{product.brand |title}}</span></p>
+                            </div>
+                            <hr>
+                    <div >
+               
+                        </div>
+                        {% with template_name=product.category|stringformat:'s' %}
+                        {% with template_path='featuresTemp/'|add:template_name|add:'Features.html' %}
+                            {% include template_path %}
+                        {% endwith %}
+                    {% endwith %}
+                    {% if wishlisted %}
+                    <button data-id = "{{product.id}}" class="shop-btn wishlisted cart-item">
+                        Remove from Wishlist    
+                     </button>
+                    
+                    {% else %}
+                    <button data-id = "{{product.id}}" class="shop-btn favourite cart-item">
+                        Add to Wishlist
+                     </button>
+                        
+                    {% endif %}    
+                                
+                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- products-info-end--------------->
+
+
+    <!--------------- Stores-section--------------->
+    <section class="product weekly-sale product-weekly footer-padding">
+        <div class="container">
+            <div class="section-title">
+                <h5>Availiable on</h5>
+            </div>
+            <div class="weekly-sale-section">
+                <div class="row g-5">
+                    {% for store in stores  %}
+                        
+                    <div class="col-lg-3 col-md-6 " ">
+                        
+                        <div class="product-wrapper " style="height: 50rem;" data-aos="fade-up">
+                            <div style="background-color: #AE1C9A;
+                            color: white;">
+
+                                {% if store.price == 0 %}
+                                    
+                                {% else %}
+                                    
+                                <p class="text-center text-white  ">
+                                    
+                                    Score :{% widthratio store.score 1 100 %} %
+                                </p>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="product-info d-flex justify-content-start  ">
+                                <img height="50" 
+                                {% if store.lowestPrice %}
+                                src="{% static '/assets/images/recommended.png' %}" alt=""
+                                {% else %}
+                                {% endif %}
+                                >
+                            </div>
+                            <div class="product-img">
+                                <img src="{{product.image_url}}"
+                                    alt="product-img">
+                                <div class="product-cart-items">
+                                    <a href="#" class="cart cart-item">
+                                        <span>
+                                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="40" height="40" rx="20" fill="white" />
+                                                <path
+                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
+                                                    fill="#181818" />
+                                                <path
+                                                    d="M12 14.4482V16.5664H12.5466H13.0933V15.3957V14.2204L15.6214 16.7486L18.1496 19.2767L18.5459 18.8759L18.9468 18.4796L16.4186 15.9514L13.8904 13.4232H15.0657H16.2364V12.8766V12.33H14.1182H12V14.4482Z"
+                                                    fill="black" fill-opacity="0.2" />
+                                                <path
+                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
+                                                    fill="#181818" />
+                                                <path
+                                                    d="M23.4345 12.8766V13.4232H24.6052H25.7805L23.2523 15.9514L20.7241 18.4796L21.125 18.8759L21.5213 19.2767L24.0495 16.7486L26.5776 14.2204V15.3957V16.5664H27.1243H27.6709V14.4482V12.33H25.5527H23.4345V12.8766Z"
+                                                    fill="black" fill-opacity="0.2" />
+                                                <path
+                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
+                                                    fill="#181818" />
+                                                <path
+                                                    d="M15.6078 23.5905L13.0933 26.1096V24.9343V23.7636H12.5466H12V25.8818V28H14.1182H16.2364V27.4534V26.9067H15.0657H13.8904L16.4186 24.3786L18.9468 21.8504L18.5596 21.4632C18.35 21.2491 18.1633 21.076 18.1496 21.076C18.1359 21.076 16.9926 22.2103 15.6078 23.5905Z"
+                                                    fill="black" fill-opacity="0.2" />
+                                                <path
+                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
+                                                    fill="#181818" />
+                                                <path
+                                                    d="M21.1113 21.4632L20.7241 21.8504L23.2523 24.3786L25.7805 26.9067H24.6052H23.4345V27.4534V28H25.5527H27.6709V25.8818V23.7636H27.1243H26.5776V24.9343V26.1096L24.0586 23.5905C22.6783 22.2103 21.535 21.076 21.5213 21.076C21.5076 21.076 21.3209 21.2491 21.1113 21.4632Z"
+                                                    fill="black" fill-opacity="0.2" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    
+  
+                                
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                
+                                <div class="product-description">
+                                    <a href="{{store.link}}" class="product-details">{{store.name|title}}
+                                    </a>
+                                    <div class="price">
+                                        <span class="new-price">
+                                        {% if store.price == 0 %}
+                                          PRICE NOT AVAILIABLE  
+                                        {% else %}
+                                        Rs. {{store.price}}
+                                            
+                                        {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-cart-btn">
+                                <a href="{{store.link}}" class="product-btn">Details</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                  
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- Stores-end--------------->
+
+
+
+
+
+
+
+
+    <!--------------- products-details-section--------------->
+    <section class="product product-description">
+        <div class="container">
+            <div class="product-detail-section">
+                <nav>
+                    <div class="nav nav-tabs nav-item" id="nav-tab" role="tablist">
+                        
+                            <button class="nav-link active" id="nav-review-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-home"
+                            aria-selected="true">Reviews</button>
+
+                    </div>
+                </nav>
+                <div class="tab-content tab-item" id="nav-tabContent">
+
+
+                <div class="tab-pane fade show active" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab"
+                tabindex="0" data-aos="fade-up">
+                <div class="product-intro-section">
+                {% if request.user.is_authenticated %}
+                    
+                <div class="product-review-section" data-aos="fade-up">
+
+
+                    <div class="review-wrapper">
+                        <div class="wrapper">
+                            <div class="wrapper-aurthor">
+                                <div class="wrapper-info">
+                                    <div class="author-details">
+                                        <h5>Add a review</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper-description">
+                            
+                                <form action="{% url 'addReview' product.id %}" method="post">
+                                    {% csrf_token %}
+
+                                    <p>What are your general thoughts about this product?<p>
+                                    <textarea name="generalReview" id="review" class="form-control " style="font-size: 1.5rem;" rows="4"></textarea>
+
+                                      
+                                    <div class="d-flex justify-content-between  ">
+                                    <p >How would you rate the software quality of the product?</p>
+                                    <div class="rating">
+                                            <input type="radio" id="softwareReview5" name="softwareReview" value="5" />
+                                            <label class="star" for="softwareReview5" title="Awesome" aria-hidden="true"></label>
+                                            <input type="radio" id="softwareReview4" name="softwareReview" value="4" />
+                                            <label class="star" for="softwareReview4" title="Great" aria-hidden="true"></label>
+                                            <input type="radio" id="softwareReview3" name="softwareReview" value="3" />
+                                            <label class="star" for="softwareReview3" title="Very good" aria-hidden="true"></label>
+                                            <input type="radio" id="softwareReview2" name="softwareReview" value="2" />
+                                            <label class="star" for="softwareReview2" title="Good" aria-hidden="true"></label>
+                                            <input type="radio" id="softwareReview1" name="softwareReview" value="1" />
+                                            <label class="star" for="softwareReview1" title="Bad" aria-hidden="true"></label>
+                                          </div>
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between  ">
+                                            <p>How would you rate the build quality of the product?<p>
+                                            <div class="rating">
+                                                    <input type="radio" id="buildReview5" name="buildReview" value="5" />
+                                                    <label class="star" for="buildReview5" title="Awesome" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview4" name="buildReview" value="4" />
+                                                    <label class="star" for="buildReview4" title="Great" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview3" name="buildReview" value="3" />
+                                                    <label class="star" for="buildReview3" title="Very good" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview2" name="buildReview" value="2" />
+                                                    <label class="star" for="buildReview2" title="Good" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview1" name="buildReview" value="1" />
+                                                    <label class="star" for="buildReview1" title="Bad" aria-hidden="true"></label>
+                                            </div>
+        
+                                    </div>
+    
+    
+                                    
+                                    <div class="d-flex justify-content-between  ">
+                                        <p>What is your overall rating for this product?<p>
+                                        <div class="rating">
+                                                <input type="radio" id="rating5" name="rating" value="5" />
+                                                <label class="star" for="rating5" title="Awesome" aria-hidden="true"></label>
+                                                <input type="radio" id="rating4" name="rating" value="4" />
+                                                <label class="star" for="rating4" title="Great" aria-hidden="true"></label>
+                                                <input type="radio" id="rating3" name="rating" value="3" />
+                                                <label class="star" for="rating3" title="Very good" aria-hidden="true"></label>
+                                                <input type="radio" id="rating2" name="rating" value="2" />
+                                                <label class="star" for="rating2" title="Good" aria-hidden="true"></label>
+                                                <input type="radio" id="rating1" name="rating" value="1" />
+                                                <label class="star" for="rating1" title="Bad" aria-hidden="true"></label>
+                                        </div>
+    
+                                </div>
+                                        <button type="submit" class="shop-btn">Submit</button>
+                                </form>
+                                </div>
+                        </div>
+                    </div>
+                    <h5 class="intro-heading">Reviews</h5>
+
+                    {% for r in reviews  %}
+                        
+
+                    <div class="review-wrapper">
+                        <div class="wrapper">
+                            <div class="wrapper-aurthor d-flex justify-content-between ">
+                                <div class="wrapper-info">
+
+                                    
+                                        <div>
+                                            <h5>{{r.user.username |title}}</h5>
+
+                                        </div>
+                            
+                                    </div>
+                                    <div>
+                                        <form action=>
+
+                                            <div class="rating">
+                                              
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="wrapper-description">
+                                    <p>What are your general thoughts about this product?<p>
+                                        <textarea disabled name="generalReview" id="review" class="form-control " style="font-size: 1.5rem;" rows="4">{{r.generalReview}}
+                                        </textarea>                             
+
+                                    <div class="d-flex justify-content-between  ">
+                                        <p >How would you rate the software quality of the product?</p>
+                                        <form >
+
+                                            <div class="rating">
+                                                <input type="radio" id="softwareReview5" name="softwareReview" value="5" {% if r.softwareReview == '5' %}checked{% endif %}/>
+                                                <label class="star" for="softwareReview5" title="Awesome" aria-hidden="true"></label>
+                                                <input type="radio" id="softwareReview4" name="softwareReview" value="4" {% if r.softwareReview == '4' %}checked{% endif %}/>
+                                                <label class="star" for="softwareReview4" title="Great" aria-hidden="true"></label>
+                                                <input type="radio" id="softwareReview3" name="softwareReview" value="3" {% if r.softwareReview == '3' %}checked{% endif %}/>
+                                                <label class="star" for="softwareReview3" title="Very good" aria-hidden="true"></label>
+                                                <input type="radio" id="softwareReview2" name="softwareReview" value="2" {% if r.softwareReview == '2' %}checked{% endif %}/>
+                                                <label class="star" for="softwareReview2" title="Good" aria-hidden="true"></label>
+                                                <input type="radio" id="softwareReview1" name="softwareReview" value="1" {% if r.softwareReview == '1' %}checked{% endif %}/>
+                                                <label class="star" for="softwareReview1" title="Bad" aria-hidden="true"></label>
+                                              </div>
+                                        </form>
+                                          
+            
+                                        </div>
+                                
+                                <div class="d-flex justify-content-between  ">
+                                    <p>How would you rate the build quality of the product?<p>
+                                        <form >
+                                            <div class="rating">
+                                                    <input type="radio" id="buildReview5" name="buildReview" value="5" {% if r.buildReview == '5' %}checked{% endif %} />
+                                                    <label class="star" for="buildReview5" title="Awesome" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview4" name="buildReview" value="4" {% if r.buildReview == '4' %}checked{% endif %} />
+                                                    <label class="star" for="buildReview4" title="Great" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview3" name="buildReview" value="3" {% if r.buildReview == '3' %}checked{% endif %} />
+                                                    <label class="star" for="buildReview3" title="Very good" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview2" name="buildReview" value="2"  {% if r.buildReview == '2' %}checked{% endif %}/>
+                                                    <label class="star" for="buildReview2" title="Good" aria-hidden="true"></label>
+                                                    <input type="radio" id="buildReview1" name="buildReview" value="1" {% if r.buildReview == '1' %}checked{% endif %}/>
+                                                    <label class="star" for="buildReview1" title="Bad" aria-hidden="true"></label>
+                                            </div>
+
+                                        </form>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between  ">
+                                <p>What is your overall rating for this product?<p>
+                                    <form >
+                                        <div class="rating">
+                                            <input disabled type="radio" id="rating5" name="rating" value="5" {% if r.rating == '5' %}checked{% endif %} />
+                                            <label disabled class="star" for="rating5" title="Awesome" aria-hidden="true"></label>
+                                            <input disabled type="radio" id="rating4" name="rating" value="4" {% if r.rating == '4' %}checked{% endif %} />
+                                            <label disabled class="star" for="rating4" title="Great" aria-hidden="true"></label>
+                                            <input disabled type="radio" id="rating3" name="rating" value="3" {% if r.rating == '3' %}checked{% endif %} />
+                                            <label disabled class="star" for="rating3" title="Very good" aria-hidden="true"></label>
+                                            <input disabled type="radio" id="rating2" name="rating" value="2" {% if r.rating == '2' %}checked{% endif %} />
+                                            <label disabled class="star" for="rating2" title="Good" aria-hidden="true"></label>
+                                            <input disabled type="radio" id="rating1" name="rating" value="1" {% if r.rating == '1' %}checked{% endif %} />
+                                            <label disabled class="star" for="rating1" title="Bad" aria-hidden="true"></label>
+                                    </div>
+
+                                    </form>
+
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <h3>Login to see and leave reviews</h3>
+                {% endif %}
+            </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- products-details-end--------------->
+
+    <!--------------- weekly-section--------------->
+  
+    <!--------------- weekly-section-end--------------->
+
+    <!--------------- footer-section--------------->
+    {% include 'footer.html' %}
+    <!--------------- footer-section-end--------------->
+    
+</body>
+{% endblock body %}
+

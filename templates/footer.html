@@ -1,0 +1,59 @@
+{% load static %}
+
+<section class="product footer">
+    <div class="container">
+        <div class="footer-section">
+            <div class="row gy-5">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-order">
+                        <!-- Use flex container for logo and site name -->
+                        <div class="logo" style="display: flex; align-items: center;">
+                            <!-- Logo Image -->
+                            <img src="{% static '/assets/images/logos/icon.webp' %}" alt="TechSpecsMaster Logo" style="max-width: 100px; margin-right: 10px;"> <!-- Adjust the max-width and margin as necessary -->
+                            
+                            <!-- Site Name -->
+                            <h5 class="text-white" style="margin: 0;">
+                                TechSpecsMaster
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="about-us">
+                        <h4 class="footer-heading footer-title">
+                            About Us
+                        </h4>
+                        <div class="footer-link about-link">
+                            <ul>
+                                <li><a href="{% url 'home:about' %}">Learn More</a></li>
+                                <li><a href="{% url 'home:contact' %}">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="contact-info">
+                        <h4 class="footer-heading footer-title">
+                            Contact Info
+                        </h4>
+                        <div class="footer-link contact-link">
+                            <div class="address">
+                                <div class="details">
+                                    <h4 class="footer-heading">Email:</h4>
+                                    <p>techspecsmaster@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="phone address">
+                                <div class="details">
+                                    <h4 class="footer-heading">Phone:</h4>
+                                    <p>03456436570 </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>

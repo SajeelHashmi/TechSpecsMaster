@@ -1,0 +1,169 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords"
+        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" crossorigin="anonymous" />
+
+    <link rel="icon" href="    {% static '/assets/images/homepage-one/icon.png' %}">
+
+    <!--title  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Techspecsmaster.pk</title>
+
+    <!--------------- swiper-css ---------------->
+    
+    <link rel="stylesheet" href="{% static '/css/swiper10-bundle.min.css' %}">
+
+    <!--------------- bootstrap-css ---------------->
+    <link rel="stylesheet" href="{% static '/css/bootstrap-5.3.2.min.css' %}">
+
+
+ 
+    <!---------------------- Range Slider ------------------->
+    <link rel="stylesheet" href="{% static '/css/nouislider.min.css' %}">
+    
+
+    <!---------------------- Scroll ------------------->
+    <link rel="stylesheet" href="{% static 'css/aos-3.0.0.css' %}">
+
+    <!--------------- additional-css ---------------->
+    
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+
+
+</head>
+{% if messages %}
+{% for message in messages  %}
+<div id="myModal" class="modal fade " >
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+
+			<div class="modal-body text-center">
+				<h4>
+                    {{message.tags | title}}
+                </h4>	
+				<p>{{message}}</p>
+			</div>
+		</div>
+	</div>
+</div> 
+<script>
+    $(document).ready(function(){
+      {% if messages %}
+      {% for message in messages %}
+      $('#myModal{{ forloop.index }}').modal('show');
+      {% endfor %}
+      {% endif %}
+    });
+    </script>
+<script>
+
+    $(document).ready(function(){
+      {% if messages %}
+      {% for message in messages %}
+      $('#myModal').modal('show');
+      setTimeout( ()=>{
+        $('#myModal').modal('hide');
+      },2000);
+      {% endfor %}
+      {% endif %}
+    });
+    </script>
+
+{% endfor %}
+{% endif %}
+{% block body %}
+    
+{% endblock body %}
+
+
+ <!--------------- jQuery ---------------->
+    
+ <script src="{% static 'assets/js/jquery_3.7.1.min.js' %}"></script>
+
+ <!--------------- bootstrap-js ---------------->
+ 
+ <script src="{% static 'assets/js/bootstrap_5.3.2.bundle.min.js' %}"></script>
+
+ <!--------------- Range-Slider-js ---------------->
+ 
+ <script src="{% static 'assets/js/nouislider.min.js' %}"></script>
+
+ <!--------------- scroll-Animation-js ---------------->
+ 
+ <script src="{% static 'assets/js/aos-3.0.0.js' %}"></script>
+
+ <!--------------- swiper-js ---------------->
+ <script src="    {% static 'assets/js/swiper10-bundle.min.js' %}
+ "></script>
+
+ <!--------------- additional-js ---------------->
+ 
+
+ <script src="{% static 'assets/js/shopus.js' %}"></script>
+
+
+ <!--------------- additional-js ---------------->
+<script>
+const wishlistBtn = document.getElementsByClassName('favourite')
+
+for (let index = 0; index < wishlistBtn.length; index++) {
+    const element = wishlistBtn[index];
+    element.addEventListener('click',(event)=>{
+
+
+        const id = element.getAttribute('data-id')
+        console.log(id)
+        fetch(`http://127.0.0.1:8000//wishlist/${id}`)
+        .then(response =>{
+            if (response.ok){
+                console.log(response)
+                return response.json()
+            }
+        })
+        .then(data => {
+            if (data.success){
+                element.classList.remove('favourite')
+                
+            }
+            window.location.reload()
+        })
+    })
+}
+
+
+const removeWishlist = document.getElementsByClassName('wishlisted')
+
+for (let index = 0; index < removeWishlist.length; index++) {
+    const element = removeWishlist[index];
+    element.addEventListener('click',(event)=>{
+        const id = element.getAttribute('data-id')
+        fetch(`http://127.0.0.1:8000//removeFromWishlist/${id}`)
+        .then(response =>{
+            if (response.ok){
+                return response.json()
+            }
+        })
+        .then(data => {
+            if (data.success){
+                element.classList.add('favourite')
+            }
+            window.location.reload()
+        })
+    })
+}
+</script>
+
+</body>
+
+</html>
+    

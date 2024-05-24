@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+
+    <!--------------- header-section --------------->
+  {% include 'header.html' %}
+    <!--------------- header-section-end --------------->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!--------------- login-section--------------->
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <section class="login account footer-padding">
+            <div class="container">
+                <div class="login-section account-section">
+                    <div class="review-form">
+                        <h5 class="comment-title">Create Account</h5>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="fname" class="form-label">First Name*</label>
+                                <input type="text" id="fname" name="fname" class="form-control" required pattern="[A-Za-z]+( [A-Za-z]+)*" title="First name must only contain letters and single spaces between words.">
+
+                            </div>
+                            <div class="review-form-name">
+                                <label for="lname" class="form-label">Last Name*</label>
+                                <input type="text" id="lname" name="lname" class="form-control" required pattern="[A-Za-z]+" title="Last name must only contain letters.(No Spaces)">
+                            </div>
+                        </div>
+                        <div class=" account-inner-form">
+                            <div class="review-form-name">
+                                <label for="email" class="form-label">Email*</label>
+                                <input type="email" id="email" name="email" required class="form-control">
+                            </div>
+                            <div class="review-form-name">
+                                <label for="phone" class="form-label">Phone*</label>
+                                <input type="tel" id="phone" name="phone"   required class="form-control" >
+                            </div>
+                        </div>
+                        <div class="review-form-name">
+                            <label for="country" class="form-label">Username*</label>
+                            <input type="text" name="username" id="username" class="form-control" required pattern="[A-Za-z0-9]+" title="Username must only contain letters and numbers.(No Spaces)">
+                        </div>
+                        
+                        <div class="review-form-name address-form">
+                            <label for="address" class="form-label">Password*</label>
+                            <input type="password" id="password" name="password" required class="form-control">
+                        </div>
+                        
+                        <div class=" account-inner-form city-inner-form">
+                            <div class="review-form-name">
+                                <label for="city" class="form-label">Address</label>
+                                <input type="text" name="address" id="address" class="form-control" >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-form-name checkbox">
+                            <div class="checkbox-item">
+                                <p class="remember">
+                            </div>
+                        </div>
+                        <div class="login-btn text-center">
+                            <button class="shop-btn">Create an Account</button>
+                            <span class="shop-account">Already have an account ?<a href="{% url 'loginView' %}">Log In</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <!--------------- login-section-end --------------->
+
+    <!--------------- footer-section--------------->
+   {% include 'footer.html' %}
+    <!--------------- footer-section-end--------------->
+<!-- Add these lines in the <head> section of your base.html or directly above your existing <script> tags -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js'></script>
+    <script>
+    // International telephone format
+    // $("#phone").intlTelInput();
+    // get the country data from the plugin
+    var countryData = window.intlTelInputGlobals.getCountryData(),
+      input = document.querySelector("#phone"),
+      addressDropdown = document.querySelector("#country");
+    
+    // init plugin
+    var iti = window.intlTelInput(input, {
+      hiddenInput: "full_phone",
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" // just for formatting/placeholders etc
+    });
+    
+    // populate the country dropdown
+    for (var i = 0; i < countryData.length; i++) {
+      var country = countryData[i];
+      var optionNode = document.createElement("option");
+      optionNode.value = country.iso2;
+      var textNode = document.createTextNode(country.name);
+      optionNode.appendChild(textNode);
+      addressDropdown.appendChild(optionNode);
+    }
+    // set it's initial value
+    addressDropdown.value = iti.getSelectedCountryData().iso2;
+    
+    // listen to the telephone input for changes
+    input.addEventListener('countrychange', function(e) {
+      addressDropdown.value = iti.getSelectedCountryData().iso2;
+    });
+    
+    // listen to the address dropdown for changes
+    addressDropdown.addEventListener('change', function() {
+      iti.setCountry(this.value);
+    });
+    </script>
+    <script>
+    //Append Value To Phone Field
+    $("#phone").prop('value', '+1 ');
+    </script>
+</body>
+    
+{% endblock body %}
+
